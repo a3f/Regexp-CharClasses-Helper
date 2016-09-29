@@ -67,18 +67,8 @@ Takes in a list and turns it into the format specified by L<User-Defined Charact
 
 =cut
 
-# extract from:
-#   +Z
-#   +T\tA
-#   +\t\t\t
-#   +\t\tA
-#   +\t
-# no match:
-#   +\t\t
-#   +
-#   +\t-
 sub fmt {
-    return join "\n", map {
+    return join '', map {
         croak 'undef unexpected' unless defined $_;
         my ($prefix, @out) = ('', $_);
         if (/^[-+!&]/ && !/^[-+!&]($|\t[^\t]|\t\t$)/) {
@@ -86,7 +76,7 @@ sub fmt {
             $prefix = $1;
         }
         @out = ($1, $2) if $out[0] =~ /^(.+)\t(.+)$/;
-        $prefix . join "\t", map {_parse $_} @out;
+        $prefix . join("\t", map {_parse $_} @out) . "\n";
     } @_;
 }
 

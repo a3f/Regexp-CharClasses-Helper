@@ -23,10 +23,10 @@ my %testcases = (
 $testcases{$_} = sprintf '%04x', $testcases{$_} for (keys %testcases);
 
 while(my ($k, $v) = each %testcases) {
-    is(Regexp::CharClasses::Helper::fmt($k), $v, 'single');
+    is(Regexp::CharClasses::Helper::fmt($k), "$v\n", 'single');
 }
 while(my ($k, $v) = each %testcases) {
-    is(Regexp::CharClasses::Helper::fmt($_.$k), $_.$v, 'prefixed') for qw/- + ! &/;
+    is(Regexp::CharClasses::Helper::fmt($_.$k), "$_$v\n", 'prefixed') for qw/- + ! &/;
 }
 my %testcases2 = %testcases;
 while(my ($k1, $v1) = each %testcases) {
@@ -34,7 +34,7 @@ while(my ($k1, $v1) = each %testcases) {
         for my $prefix (qw(- + ! &), '') {
             is(
                 Regexp::CharClasses::Helper::fmt("$prefix$k1\t$k2"),
-                "$prefix$v1\t$v2",
+                "$prefix$v1\t$v2\n",
                 'range'
             );
         }
@@ -44,7 +44,7 @@ while(my ($k1, $v1) = each %testcases) {
 #TODO: iterate over subsets?
 is(
     Regexp::CharClasses::Helper::fmt(keys %testcases),
-    join("\n", values %testcases),
+    join("\n", values %testcases)."\n",
     'multi-line'
 );
     
