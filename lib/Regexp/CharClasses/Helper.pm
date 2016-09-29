@@ -49,7 +49,7 @@ Regexp::CharClasses::Helper - User defined character class strings by unicode na
 sub _parse {
     my $in = $_[0] || $_;
     croak "Unknown charname '$in'" if $in =~ /^U\+/i;
-    return $in if $in =~ /In|Is/;
+    return $in if $in =~ /In|Is|::/;
     my $code = length $in == 1 ? ord $in
                                : charnames::vianame $in;
     croak "Unknown charname '$in'" unless defined $code;
