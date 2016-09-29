@@ -22,17 +22,12 @@ Regexp::CharClasses::Helper - User defined character class strings by unicode na
 
     sub InCapitalsButNot42 {
         return Regexp::CharClasses::Helper::fmt(
-            "+A\tZ",
-            "-\x42"
+            "+A\tZ", # from A till Z
+            "-\x42"  # except \x42
         );
     }
     say "doesn't" if 'ABC' =~ /\p{InCapitalsButNot42}+/;
         
-
-
-=head1 DESCRIPTION
-
-=head1 IMPLEMENTATION
 
 =head1 METHODS AND ARGUMENTS
 
