@@ -67,7 +67,7 @@ sub fmt {
         croak 'undef unexpected' unless defined $_;
         my ($prefix, @out) = ('', $_);
         if (/^[-+!&]/ && !/^[-+!&]($|\t[^\t]|\t\t$)/) {
-            $out[0] = s/^([-+!&])//r;
+            $out[0] =~ s/^([-+!&])//;
             $prefix = $1;
         }
         @out = ($1, $2) if $out[0] =~ /^(.+)\t(.+)$/;
