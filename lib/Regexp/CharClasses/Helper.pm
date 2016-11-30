@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+use v5.15.7;
 package Regexp::CharClasses::Helper;
 
 # ABSTRACT: Helper for creating user defined character class strings
